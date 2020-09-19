@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {Switch, Route} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import {API_URL} from './config';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//#region Components
+import Main from './components/Main/Main';
+//#endregion Components
+
+
+export default class App extends Component {
+
+  state = {
+    IronsData: []
+  }
+  componentDidMount(){
+    axios.get(`${API_URL}/ironsdata`)
+      .then((res)=>{
+        this.setState({
+          IronsData : res.data
+        })
+      })
+  }
+
+  render() {
+    return (
+      <Switch>
+        <Route exact path={'/'} render={()=>{
+          return <Main IronsData = {this.state.IronsData}/>
+        }}/>
+      </Switch>
+    )
+  }
 }
-
-export default App;
