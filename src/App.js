@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import {API_URL} from './config';
@@ -27,7 +26,7 @@ export default class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path={'/'} render={()=>{
+        <Route exact path="/" render={()=>{
           return <Main IronsData = {this.state.IronsData}/>
         }}/>
       </Switch>
