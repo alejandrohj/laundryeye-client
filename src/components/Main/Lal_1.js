@@ -10,7 +10,7 @@ export default function Lal_1(props) {
     // let LAL1DataRT = LAL1Data[LAL1Data.length]
     return (
         <div style={{margin: '40px', width: '500px', textAlign: 'center'}}>
-            <h4>Linea de acabado liso nº1</h4>
+            <h4>Linea de acabado liso Nº1</h4>
             <div style={{display: 'flex', alignItems:'center'}}>
                 <img src={`${PUBLIC_URL}/PlanoPlantaLAL.jpg`} height='400' alt='LAL1'/>
                 <div style={{border: '1px solid gray', padding: '10px', alignSelf: 'flex-start', marginTop: '10px', textAlign: 'left'}}>
