@@ -15,19 +15,14 @@ export default class App extends Component {
     IronsData: []
   }
   componentDidMount(){
-    axios.get(`${API_URL}/ironsdata`)
-      .then((res)=>{
-        this.setState({
-          IronsData : res.data
-        })
-      })
+
   }
 
   render() {
     return (
       <Switch>
         <Route exact path="/" render={()=>{
-          return <Main IronsData = {this.state.IronsData}/>
+          return <Main/>
         }}/>
       </Switch>
     )

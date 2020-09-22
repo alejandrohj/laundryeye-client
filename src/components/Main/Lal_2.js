@@ -3,13 +3,13 @@ import {PUBLIC_URL} from '../../config';
 
 
 export default function Lal_1(props) {
-    const LALData = props.LAL1Data;
+    const LALData = props.LAL2Data;
     const LALData_RT = LALData[LALData.length-1]
     console.log(LALData_RT )
     if(!LALData) return <p>Loading...</p>
     return (
         <div style={{margin: '40px', width: '500px', textAlign: 'center'}}>
-            <h4>Linea de acabado liso Nº1</h4>
+            <h4>Linea de acabado liso Nº2</h4>
             <div style={{display: 'flex', alignItems:'center'}}>
                 <img src={`${PUBLIC_URL}/PlanoPlantaLAL.jpg`} height='400' alt='LAL1'/>
                 <div style={{border: '1px solid gray', padding: '10px', alignSelf: 'flex-start', marginTop: '10px', textAlign: 'left'}}>
