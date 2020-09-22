@@ -43,8 +43,10 @@ export default function Main() {
     return (
         <div>
         <Navbar/>
-        <LAL1 LAL1Data = {LAL1Data}/>
-        <LAL2 LAL2Data = {LAL2Data}/>
+        <div style={{display: 'flex', flexWrap: 'wrap'}}>
+            <LAL1 LAL1Data = {LAL1Data}/>
+            <LAL2 LAL2Data = {LAL2Data}/>
+        </div>
         <Footer/>
         </div>
     )
