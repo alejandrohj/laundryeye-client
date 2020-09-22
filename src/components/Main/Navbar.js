@@ -4,8 +4,7 @@ import {PUBLIC_URL} from '../../config';
 
 export default function NavbarComp() {
     return (
-        <div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
                 <Navbar.Brand href="#home"><img src={`${PUBLIC_URL}/mogan-horizontal_blanco_MODIFICACIÓN.png`} alt='logo' height='50'/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -27,6 +26,5 @@ export default function NavbarComp() {
                     </Nav>
             </Navbar.Collapse>
             </Navbar>
-        </div>
     )
 }

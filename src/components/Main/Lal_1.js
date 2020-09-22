@@ -23,7 +23,7 @@ export default function Lal_1(props) {
         <div style={{margin: '40px', width: '500px', textAlign: 'center'}}>
             <h4>Linea de acabado liso Nº1</h4>
             <div style={{display: 'flex', alignItems:'center'}}>
-                <img src={`${PUBLIC_URL}/PlanoPlantaLAL.jpg`} height='400' alt='LAL1'/>
+                <img className="lalImg" src={`${PUBLIC_URL}/PlanoPlantaLAL.jpg`} alt='LAL1'/>
                 <div style={{border: '1px solid gray', padding: '10px', alignSelf: 'flex-start', marginTop: '10px', textAlign: 'left'}}>
                     <p>Estado:<b style={{color: color}}>{estado}</b></p>
                     {

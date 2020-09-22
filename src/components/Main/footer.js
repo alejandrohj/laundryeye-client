@@ -5,7 +5,7 @@ export default function footer() {
     return (
         <Navbar fixed="bottom" expand="lg" variant="dark" bg="dark" >
         <Container>
-            <Navbar.Brand href="#">Navbar</Navbar.Brand>
+            <Navbar.Brand href="#">Version Alpha</Navbar.Brand>
         </Container>
         </Navbar>
     )

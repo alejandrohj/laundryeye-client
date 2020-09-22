@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+/*/////////###########################//////////////*/
+.lalImg{
+  height: 400px;
+}
+
+@media only screen and (max-width: 450px){
+  .lalImg{
+    height: 200px;
+  }
+}
