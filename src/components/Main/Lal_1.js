@@ -13,6 +13,7 @@ export default function Lal_1(props) {
             <div style={{display: 'flex', alignItems:'center'}}>
                 <img src={`${PUBLIC_URL}/PlanoPlantaLAL.jpg`} height='400' alt='LAL1'/>
                 <div style={{border: '1px solid gray', padding: '10px', alignSelf: 'flex-start', marginTop: '10px', textAlign: 'left'}}>
+                    <p>Estado:<b>{LALData_RT.status}</b></p>
                     <p>Programa: <b>{LALData_RT.productivity.program}</b></p>
                     <p>Velocidad: <b>{LALData_RT.productivity.speed}%</b></p>
                     <p>Temperatura: <b>{LALData_RT.productivity.temperature}ºC</b></p>
