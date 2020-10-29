@@ -1,30 +1,77 @@
 import React, { Component } from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, withRouter} from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import {API_URL} from './config';
 
 //#region Components
+import Navbar from './components/Main/Navbar';
 import Main from './components/Main/Main';
+import CagesWasher from './components/cageWasher/CageWasher';
+import SignIn from './components/auth/SignIn';
 //#endregion Components
 
 
-export default class App extends Component {
+class App extends Component {
 
   state = {
-    IronsData: []
+    IronsData: [],
+    loggedInUser: null
   }
-  componentDidMount(){
+  componentDidMount = () =>{
+    if(!this.loggedInUser){
+      axios.get(`${API_URL}/user`, {withCredentials: true})
+        .then((result) => {
+          this.setState({
+            loggedInUser: result.data
+          })
+        })
+    }
+  }
 
+  handleSignIn = (e) =>{
+    e.preventDefault();
+    const {email, password} = e.currentTarget;
+
+    axios.post(`${API_URL}/signin`,{email: email.value, password: password.value},  {withCredentials: true})
+      .then((res)=>{
+        this.setState({
+          loggedInUser: res.data
+        })
+        window.location.reload(false);
+      })
+  }
+
+  handleLogOut = () =>{
+    console.log('loggingOut')
+    axios.post(`${API_URL}/logout`, {}, {withCredentials: true})
+    .then(()=>{
+      this.setState({
+        loggedInUser: null
+      }, ()=>{
+        this.props.history.push('/')
+      })
+    })
   }
 
   render() {
     return (
+      <>
+      <Navbar handleLogOut={this.handleLogOut}/>
       <Switch>
         <Route exact path="/" render={()=>{
           return <Main/>
         }}/>
+        <Route path="/signin" render={()=>{
+          return <SignIn loggedInUser ={this.loggedInUser} onSignIn = {this.handleSignIn}/>
+        }}/>
+        <Route path="/cageswasher" render={()=>{
+          return <CagesWasher/>
+        }}/>
       </Switch>
+      </>
     )
   }
 }
+
+export default withRouter(App)
