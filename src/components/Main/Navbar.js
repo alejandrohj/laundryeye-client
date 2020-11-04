@@ -18,9 +18,12 @@ export default function NavbarComp(props) {
                         <NavDropdown.Item href="#action/3.4">A</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
-                    <Nav>
+                    {
+                    props.loggedInUser? (<Nav>
                     <Nav><Button onClick={props.handleLogOut}>LogOut </Button></Nav>
-                    </Nav>
+                    </Nav>) : ('')
+                    }
+                    
             </Navbar.Collapse>
             </Navbar>
     )

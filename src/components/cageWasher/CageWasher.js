@@ -2,9 +2,10 @@ import React,{useState, useEffect} from 'react'
 import {Redirect} from 'react-router-dom'
 import Footer from '../Main/footer';
 import axios from 'axios';
-import {API_URL} from '../../config';
+import {API_URL, PUBLIC_URL} from '../../config';
 
 import {Button} from 'react-bootstrap';
+import ModifyTimes from './ModifyTimes';
 
 export default function CageWasher() {
     const [loggedInUser, setLoggedInUser] = useState(null);
@@ -41,15 +42,39 @@ export default function CageWasher() {
             console.log(res.data)
         })
     }
+    const handleModify = (e) =>{
+        e.preventDefault();
+        const {status, orders} = RTData
+        const {timeToWash, timeToDry} = e.currentTarget
+        axios.post(`${API_URL}/tlc/add`,{status,orders, timeToWash: timeToWash.value, timeToDry: timeToDry.value}, {withCredentials: true})
+            .then((res)=>{
+                console.log(res.data)
+            })
+
+    }
+
     return (
         <div style={{margin: '30px'}}>
         <h1>Tunel de lavado de jaulas</h1>
-        <h5>Estado:{RTData.status}</h5>
-        <div>
-        <h6>Control remoto</h6>
-        <Button variant="success" onClick={handleStartTLC}>Marcha</Button>
-        <Button variant="danger" style={{marginLeft: '10px'}} onClick={handleStopTLC}>Paro</Button>  
-        </div> 
+        <div style={{display:'flex', flexWrap : 'wrap'}}>
+            <div>
+                <img src={`${PUBLIC_URL}/tunelLavJaulas.jpg`} alt={'img_lavJaulas'} width ={'300px'}/>
+                
+            </div>
+            <div style={{margin: '40px'}}>
+            <h5>Estado:{RTData.status}</h5>
+                <div style={{display:'flex', flexWrap : 'wrap', alignItems:'center', border: '1px solid', padding: '15px', margin: '10px 0px'}}>
+                    <div style={{marginRight: '20px'}}>
+                        <p><b>Tiempo lavado: </b>{RTData.timeWashing}/{RTData.timeToWash} min</p>
+                        <p><b>Tiempo secado: </b>{RTData.timeDrying}/{RTData.timeToDry} min</p>
+                    </div>
+                    <ModifyTimes RTData ={RTData} onModify ={handleModify}/>
+                </div>
+                <h6>Control remoto</h6>
+                <Button variant="success" onClick={handleStartTLC}>Marcha</Button>
+                <Button variant="danger" style={{marginLeft: '10px'}} onClick={handleStopTLC}>Paro</Button>  
+            </div>
+        </div>
         </div>
     )
 }

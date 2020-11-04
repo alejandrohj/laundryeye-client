@@ -57,7 +57,7 @@ class App extends Component {
   render() {
     return (
       <>
-      <Navbar handleLogOut={this.handleLogOut}/>
+      <Navbar handleLogOut={this.handleLogOut} loggedInUser = {this.loggedInUser}/>
       <Switch>
         <Route exact path="/" render={()=>{
           return <Main/>
