@@ -24,8 +24,16 @@ export default function CageWasher() {
             .then((res)=>{
                 console.log(res.data)
                 setCagesWasherData(res.data)
+                setInterval(loadData,2000)
         })
     },[])
+
+    const loadData = () =>{
+        axios.get(`${API_URL}/tlc`,{withCredentials: true})
+            .then((res)=>{
+                setCagesWasherData(res.data)
+            })
+    }
     if(redirecting)return <Redirect to={'/signin'}/>
     if(!cagesWasherData) return <p>Loading...</p>
     let RTData = cagesWasherData[cagesWasherData.length-1];
@@ -49,6 +57,7 @@ export default function CageWasher() {
         axios.post(`${API_URL}/tlc/add`,{status,orders, timeToWashRemoteModifiyed: timeToWash.value, timeToDryRemoteModifiyed: timeToDry.value}, {withCredentials: true})
             .then((res)=>{
                 console.log(res.data)
+                window.location.reload(false);
             })
 
     }
