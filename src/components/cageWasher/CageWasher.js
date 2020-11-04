@@ -57,7 +57,8 @@ export default function CageWasher() {
         axios.post(`${API_URL}/tlc/add`,{status,orders, timeToWashRemoteModifiyed: timeToWash.value, timeToDryRemoteModifiyed: timeToDry.value}, {withCredentials: true})
             .then((res)=>{
                 console.log(res.data)
-                window.location.reload(false);
+                RTData.timeToWash = res.data.timeToWashRemoteModifiyed;
+                RTData.timeToDry = res.data.timeToDryRemoteModifiyed;
             })
 
     }
