@@ -46,7 +46,7 @@ export default function CageWasher() {
         e.preventDefault();
         const {status, orders} = RTData
         const {timeToWash, timeToDry} = e.currentTarget
-        axios.post(`${API_URL}/tlc/add`,{status,orders, timeToWash: timeToWash.value, timeToDry: timeToDry.value}, {withCredentials: true})
+        axios.post(`${API_URL}/tlc/add`,{status,orders, timeToWashRemoteModifiyed: timeToWash.value, timeToDryRemoteModifiyed: timeToDry.value}, {withCredentials: true})
             .then((res)=>{
                 console.log(res.data)
             })
