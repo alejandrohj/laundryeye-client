@@ -18,16 +18,7 @@ class App extends Component {
     IronsData: [],
     loggedInUser: null
   }
-  componentDidMount = () =>{
-    if(!this.loggedInUser){
-      axios.get(`${API_URL}/user`, {withCredentials: true})
-        .then((result) => {
-          this.setState({
-            loggedInUser: result.data
-          })
-        })
-    }
-  }
+  
 
   handleSignIn = (e) =>{
     e.preventDefault();
@@ -52,6 +43,26 @@ class App extends Component {
         this.props.history.push('/')
       })
     })
+  }
+  cleanRealTimeData = () =>{
+    console.log('cleaning rt')
+    axios.get(`${API_URL}/rtdata/delete`,{withCredentials: true})
+      .then((response)=>{
+        console.log(response)
+      })
+  }
+
+  componentDidMount = () =>{
+    setInterval(this.cleanRealTimeData,86400000)
+    console.log('mounted')
+    if(!this.loggedInUser){
+      axios.get(`${API_URL}/user`, {withCredentials: true})
+        .then((result) => {
+          this.setState({
+            loggedInUser: result.data
+          })
+        })
+    }
   }
 
   render() {
