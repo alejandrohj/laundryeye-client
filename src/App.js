@@ -44,16 +44,16 @@ class App extends Component {
       })
     })
   }
-  cleanRealTimeData = () =>{
-    console.log('cleaning rt')
-    axios.get(`${API_URL}/rtdata/delete`,{withCredentials: true})
-      .then((response)=>{
-        console.log(response)
-      })
-  }
+  // cleanRealTimeData = () =>{
+  //   console.log('cleaning rt')
+  //   axios.get(`${API_URL}/rtdata/delete`,{withCredentials: true})
+  //     .then((response)=>{
+  //       console.log(response)
+  //     })
+  // }
 
   componentDidMount = () =>{
-    setInterval(this.cleanRealTimeData,86400000)
+    //setInterval(this.cleanRealTimeData,86400000)
     console.log('mounted')
     if(!this.loggedInUser){
       axios.get(`${API_URL}/user`, {withCredentials: true})
