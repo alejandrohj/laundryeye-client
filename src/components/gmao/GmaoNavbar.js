@@ -14,7 +14,7 @@ export default function GmaoNavbar(props) {
                     <Nav.Link href="/gamo/maintenance">Mantenimiento</Nav.Link>
                     <Nav.Link href="/gmao/stock">Stock</Nav.Link>
                     </Nav>
-                    <Nav style= {{marginRight: '20px', color: 'white'}}><p>{props.loggedInUser.userName}</p></Nav>                 
+                    <Nav style= {{margin: '0px 20px 0px 0px', fontSize: '20px'}}><p style= {{margin: '0px'}}>{props.loggedInUser.userName}</p></Nav>                 
                 </Navbar.Collapse>
 
             </Navbar>

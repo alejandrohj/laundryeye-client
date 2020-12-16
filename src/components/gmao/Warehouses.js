@@ -1,5 +1,7 @@
 import React,{useEffect,useState} from 'react'
-import {Form, Button, Row, Col, Modal, Card} from 'react-bootstrap';
+import {Form, Button, Row, Col, Modal, Card, Accordion} from 'react-bootstrap';
+
+import WarehouseItems from './WarehouseItems';
 
 export default function Warehouses(props) {
 
@@ -16,12 +18,22 @@ export default function Warehouses(props) {
             {
                 props.warehouses?(
                     props.warehouses.map((elem)=>{
-                        return (<Card style={{ width: '18rem' }}>
+                        return (<Card key ={elem.i,'ware'} style={{margin: '5px 10px', textAlign: 'center' }}>
                                 <Card.Body>
                                     <Card.Title>{elem.name}</Card.Title>
                                     <Card.Text>
-                                        <p>Zona:{elem.floor}</p>
+                                        <p>Localización: {elem.floor}</p>
                                     </Card.Text>
+                                    <Accordion defaultActiveKey="0">
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                                        Desplegar
+                                    </Accordion.Toggle>
+                                    <Accordion.Collapse eventKey="1">
+                                    <Card.Body>
+                                        <WarehouseItems warehouse = {elem}/>
+                                    </Card.Body>
+                                    </Accordion.Collapse>
+                                    </Accordion>
                                 </Card.Body>
                         </Card>)
                     })

@@ -56,11 +56,9 @@ class App extends Component {
 
   componentDidMount = () =>{
     //setInterval(this.cleanRealTimeData,86400000)
-    console.log('mounted')
     if(!this.loggedInUser){
       axios.get(`${API_URL}/user`, {withCredentials: true})
         .then((result) => {
-          console.log(result.data)
           this.setState({
             loggedInUser: result.data
           })
@@ -69,7 +67,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.loggedInUser)
     return (
       <>
       <Navbar handleLogOut={this.handleLogOut} loggedInUser = {this.loggedInUser}/>

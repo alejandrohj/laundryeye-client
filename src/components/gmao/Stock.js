@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
 import {Redirect} from 'react-router-dom'
-import {API_URL, PUBLIC_URL} from '../../config';
+import {API_URL} from '../../config';
 
 import GmaoNavbar from './GmaoNavbar';
 import Warehouses from './Warehouses';
@@ -20,6 +20,7 @@ export default function Stock(props) {
         })
         axios.get(`${API_URL}/gmao/warehouses`)
         .then((result)=>{
+            console.log(result.data)
             setWarehouses(result.data)
         })
     },[])
@@ -35,12 +36,11 @@ export default function Stock(props) {
     }
 
     if(redirecting) return <Redirect to={'/signin'}/>
-    if(!loggedInUser)return <p>Loading...</p>
+    if(!loggedInUser || !warehouses)return <p>Loading...</p>
     return (
         <div>
             <GmaoNavbar loggedInUser= {loggedInUser}/>
             <Warehouses warehouses = {warehouses} onCreate ={handleCreateWarehouse}/>
-            
         </div>
     )
 }
