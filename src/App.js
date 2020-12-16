@@ -9,6 +9,8 @@ import Navbar from './components/Main/Navbar';
 import Main from './components/Main/Main';
 import CagesWasher from './components/cageWasher/CageWasher';
 import SignIn from './components/auth/SignIn';
+import Gmao from './components/gmao/GMAO';
+import Stock from './components/gmao/Stock';
 //#endregion Components
 
 
@@ -58,6 +60,7 @@ class App extends Component {
     if(!this.loggedInUser){
       axios.get(`${API_URL}/user`, {withCredentials: true})
         .then((result) => {
+          console.log(result.data)
           this.setState({
             loggedInUser: result.data
           })
@@ -66,6 +69,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.loggedInUser)
     return (
       <>
       <Navbar handleLogOut={this.handleLogOut} loggedInUser = {this.loggedInUser}/>
@@ -78,6 +82,12 @@ class App extends Component {
         }}/>
         <Route path="/cageswasher" render={()=>{
           return <CagesWasher/>
+        }}/>
+        <Route exact path="/gmao" render={()=>{
+          return <Gmao/>
+        }}/>
+        <Route path="/gmao/stock" render={()=>{
+          return <Stock/>
         }}/>
       </Switch>
       </>
