@@ -24,6 +24,9 @@ export default function Main() {
                 setLAL2Data(lal2Data)
                 setInterval(loadData,2000)
             })
+            .catch(()=>{
+                setInterval(loadData,2000)
+            })
     },[])
     const loadData = () =>{
         axios.get(`${API_URL}/ironsdata`)
