@@ -5,9 +5,12 @@ import WarehouseItems from './WarehouseItems';
 
 export default function Warehouses(props) {
 
+    const [warehouses,setWarehouses] =useState(props.warehouses)
+
     const [showCreate, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
+
     return (
         <div>
             <p style={{textAlign: 'center', marginTop: '20px', color: '#328CB6', fontWeight: '600', fontSize: '24px'}}>Almacenes</p>
@@ -16,9 +19,9 @@ export default function Warehouses(props) {
             </div>
             <hr/>
             {
-                props.warehouses?(
-                    props.warehouses.map((elem)=>{
-                        return (<Card key ={elem.i,'ware'} style={{margin: '5px 10px', textAlign: 'center' }}>
+                warehouses?(
+                    warehouses.map((elem,i)=>{
+                        return (<Card bg='light' border="dark" key ={i+'warehouses'} style={{margin: '10px 10px', textAlign: 'center' }}>
                                 <Card.Body>
                                     <Card.Title>{elem.name}</Card.Title>
                                     <Card.Text>
@@ -29,7 +32,7 @@ export default function Warehouses(props) {
                                         Desplegar
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="1">
-                                    <Card.Body>
+                                    <Card.Body id='stockView'>
                                         <WarehouseItems warehouse = {elem}/>
                                     </Card.Body>
                                     </Accordion.Collapse>

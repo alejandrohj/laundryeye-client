@@ -53,7 +53,7 @@ export default function AddNewItem(props) {
                   <option>Elige el artículo</option>
                   {
                     items.map((elem, i) => {
-                    return <option key={'items' + i} value={elem._id}>{elem.name}  {elem.brach}  {elem.ref} {elem.commentary}</option>
+                    return <option key={'itemoption' + i} value={elem._id}>{elem.name}  {elem.brach}  {elem.ref} {elem.commentary}</option>
                     })
                   }
                 </Form.Control>

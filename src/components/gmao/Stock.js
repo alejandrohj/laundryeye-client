@@ -31,7 +31,7 @@ export default function Stock(props) {
         console.log('creating')
         axios.post(`${API_URL}/gmao/warehouses/create`,{name: name.value,floor: floor.value}, {withCredentials: true})
             .then((result)=>{
-                console.log(result.data)
+                window.location.reload(false);
             })
     }
 
