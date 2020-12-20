@@ -22,23 +22,11 @@ export default function AddNewItem(props) {
             })
     },[])
 
-    const handleCreateNewItem = (e)=> {
-        e.preventDefault();
-        const {name,branch,ref,category,subcategory,unit,commentary,price} = e.currentTarget;
-        console.log(name.value,branch.value,ref.value, category.value, subcategory.value, unit.value, commentary.value, price.value)
-        axios.post(`${API_URL}/gmao/item/create`,{name: name.value,branch: branch.value,ref:ref.value, category:category.value,
-        subcategory:subcategory.value,unit: unit.value, commentary: commentary.value, price: price.value },
-         {withCredentials: true})
-            .then((result)=>{
-                window.location.reload(false);
-            })
-    }
-
     if(!items){return <p>Loging...</p>}
     return (
         <div>
          <div style={{textAlign: 'center'}} className="create-laundryitem-btn">
-            <Button onClick={handleOpen} className="general-btn createbtn">Añadir nuevo artículo</Button>
+            <Button id='createBtn' onClick={handleOpen} className="general-btn createbtn">Añadir nuevo artículo</Button>
         </div>
          <Modal centered show={showCreate} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -72,7 +60,7 @@ export default function AddNewItem(props) {
             </Form>
             </Modal.Body>
             <p style={{textAlign: 'center'}}>Tambien puedes crear uno nuevo:</p>
-            <CreateNewItem onCreate={handleCreateNewItem}/>
+            <CreateNewItem onCreate={props.onCreateNewItem}/>
             </Modal>
             
         </div>

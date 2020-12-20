@@ -11,8 +11,8 @@ export default function WarehouseItems(props) {
     //Add the new item to the warehouse documment 
     const handleAddNewItemToWarehouse = (e)=>{
         e.preventDefault();
-        const {item} = e.currentTarget;
-        const{_id, stock} = warehousetoDisplay;
+        const {item} = e.currentTarget; //Almacenamos el item que queremos añadir al almacen
+        const{_id, stock} = warehousetoDisplay; //Almacenamos el id y el array stock del alamcen actual
         let newStock =[];
         console.log(stock)
         const newItem = {itemId:item.value, quantity: 1}
@@ -33,6 +33,40 @@ export default function WarehouseItems(props) {
                 window.location.reload(false);
         })
     }
+
+    const handleCreateNewItem = (e)=> {
+        e.preventDefault();
+        const {name,branch,ref,category,subcategory,unit,commentary,price} = e.currentTarget;
+        console.log(name.value,branch.value,ref.value, category.value, subcategory.value, unit.value, commentary.value, price.value)
+        axios.post(`${API_URL}/gmao/item/create`,{name: name.value,branch: branch.value,ref:ref.value, category:category.value,
+        subcategory:subcategory.value,unit: unit.value, commentary: commentary.value, price: price.value },
+         {withCredentials: true})
+            .then((result)=>{
+                //Check to create a component, cause its used two times
+                const item =result.data;
+                const{_id, stock} = warehousetoDisplay; //Almacenamos el id y el array stock del alamcen actual
+                let newStock =[];
+                console.log(item)
+                const newItem = {itemId:item, quantity: 1} //Cuidado en este caso no hace falta acceder a value
+                if(stock.length !==0){
+                    const stockClone = JSON.parse(JSON.stringify(stock));
+                    console.log(stockClone)
+                    stockClone.push(newItem);
+                    newStock = stockClone;
+                    console.log(stockClone)
+                    console.log('if')
+                }
+                else{
+                    newStock = [newItem]
+                }
+                console.log(newStock);
+                axios.post(`${API_URL}/gmao/warehouse/${_id}/update`,{stock: newStock},{withCredentials: true})
+                    .then((response)=>{
+                        //window.location.reload(false);
+                })
+            })
+    }
+    
     const handleAmountChange = (change,name) =>{
         let cloneOfItems = JSON.parse(JSON.stringify(warehousetoDisplay.stock));
         let ItemsModified = cloneOfItems.map((elem)=>{
@@ -62,14 +96,12 @@ export default function WarehouseItems(props) {
     console.log(warehousetoDisplay)
     return (
         <>
-            <h4>STOCK</h4>
-            <Table id='StocksTable' style={{marginTop:'20px'}} striped bordered hover variant="dark">
+            <h6>STOCK</h6>
+            <Table style={{marginTop:'10px'}} id='StocksTable'  striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                            <th>#</th>
                             <th>Nombre/Marca-Modelo,ref</th>
                             <th>Categorías</th>
-                            <th>Precio</th>
                             <th>Cantidad</th>
                             </tr>
                         </thead>
@@ -78,10 +110,8 @@ export default function WarehouseItems(props) {
                     return(
                         <tbody key={i+'item'}>
                             <tr>
-                            <td>{i}</td>
-                            <td>{elem.itemId.name} {elem.itemId.branch} {elem.itemId.ref}</td>
-                            <td>{elem.itemId.category} {elem.itemId.subcategory}</td>
-                            <td>{elem.itemId.price}</td>
+                            <td><b>{elem.itemId.name}</b> / {elem.itemId.branch} - {elem.itemId.ref}</td>
+                            <td><b>{elem.itemId.category}</b> <small>{elem.itemId.subcategory}</small></td>
                             <td style={{}}>
                                 {
                                 elem.quantity===0 ? <Button disabled={true} className='lbtn' onClick={() =>handleAmountChange('less',elem.itemId.name)} variant="danger">-</Button> : 
@@ -97,7 +127,7 @@ export default function WarehouseItems(props) {
                 })
             }
             </Table>
-            <AddNewItem onCreate={handleAddNewItemToWarehouse}/>
+            <AddNewItem onCreate={handleAddNewItemToWarehouse} onCreateNewItem={handleCreateNewItem}/>
         </>
     )
 }

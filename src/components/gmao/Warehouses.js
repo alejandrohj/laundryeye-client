@@ -13,16 +13,16 @@ export default function Warehouses(props) {
 
     return (
         <div>
-            <p style={{textAlign: 'center', marginTop: '20px', color: '#328CB6', fontWeight: '600', fontSize: '24px'}}>Almacenes</p>
+            <p id='wareousesTitle' style={{textAlign: 'center', color: '#328CB6', fontWeight: '600'}}>Almacenes</p>
             <div style={{textAlign: 'center'}} className="create-laundryitem-btn">
-            <Button onClick={handleOpen} className="general-btn createbtn">Crear nuevo almacen</Button>
+            <Button id='createBtn' onClick={handleOpen} className="general-btn createbtn">Crear nuevo almacen</Button>
             </div>
             <hr/>
             {
                 warehouses?(
                     warehouses.map((elem,i)=>{
-                        return (<Card bg='light' border="dark" key ={i+'warehouses'} style={{margin: '10px 10px', textAlign: 'center' }}>
-                                <Card.Body>
+                        return (<Card id='itemsCard' bg='light' border="dark" key ={i+'warehouses'} style={{textAlign: 'center' }}>
+                                <Card.Body style={{padding: '0px'}}>
                                     <Card.Title>{elem.name}</Card.Title>
                                     <Card.Text>
                                         <p>Localización: {elem.floor}</p>
@@ -33,7 +33,7 @@ export default function Warehouses(props) {
                                     </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="1">
                                     <Card.Body id='stockView'>
-                                        <WarehouseItems warehouse = {elem}/>
+                                        <WarehouseItems id='warehouseItemsComponent' warehouse = {elem} />
                                     </Card.Body>
                                     </Accordion.Collapse>
                                     </Accordion>
