@@ -62,7 +62,7 @@ export default function WarehouseItems(props) {
                 console.log(newStock);
                 axios.post(`${API_URL}/gmao/warehouse/${_id}/update`,{stock: newStock},{withCredentials: true})
                     .then((response)=>{
-                        //window.location.reload(false);
+                        window.location.reload(false);
                 })
             })
     }
@@ -125,15 +125,22 @@ export default function WarehouseItems(props) {
                             <td><Nav.Link style={{color: 'white'}} href={`/gamo/item/${elem.itemId._id}/details`}><b>
                             {elem.itemId.name}</b>/ {elem.itemId.branch} - {elem.itemId.ref}</Nav.Link> </td>
                             <td><b>{elem.itemId.category}</b> <small>{elem.itemId.subcategory}</small></td>
-                            <td style={{}}>
+                            <td id='quitSumSubCell'>
                                 {
-                                elem.quantity===0 ? <><Button id='quitItemBtn' onClick={(e)=>handleDeleteItemFromWarehouse(elem.itemId._id)}> Quitar</Button>
+                                elem.quantity===0 ? <><div><Button id='quitItemBtn' onClick={(e)=>handleDeleteItemFromWarehouse(elem.itemId._id)}> Quitar</Button></div>
+                                <div>
                                 <Button disabled={true} className='lbtn' onClick={() =>handleAmountChange('less',elem.itemId.name)} variant="danger">-</Button>
-                                </> : 
-                                <Button className='lbtn' onClick={() =>handleAmountChange('less',elem.itemId.name)} variant="danger">-</Button>
-                                }
                                 <label style={{border: 'none', margin: '0px 8px'}}>{elem.quantity}</label>
                                 <Button className="general-btn lbtn" onClick={() =>handleAmountChange('more',elem.itemId.name)} >+</Button>
+                                </div>
+                                </> : 
+                                <div>
+                                <Button className='lbtn' onClick={() =>handleAmountChange('less',elem.itemId.name)} variant="danger">-</Button>
+                                <label style={{border: 'none', margin: '0px 8px'}}>{elem.quantity}</label>
+                                <Button className="general-btn lbtn" onClick={() =>handleAmountChange('more',elem.itemId.name)} >+</Button>
+                                </div>
+                                }
+                                
                             </td>
                             </tr>
                         </tbody>

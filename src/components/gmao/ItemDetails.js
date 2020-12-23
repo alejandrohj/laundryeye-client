@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
-import {Form, Row, Col, Button, Nav} from 'react-bootstrap';
+import {Form, Row, Col, Button, Nav,InputGroup} from 'react-bootstrap';
 import axios from 'axios';
 import {API_URL} from '../../config';
 
@@ -56,7 +56,7 @@ export default function ItemDetails(props) {
     return (
         <>
         <GmaoNavbar loggedInUser= {loggedInUser}/>
-        <Form onSubmit={handleUpdateItem} style={{margin: '5px'}}>
+        <Form onSubmit={handleUpdateItem} style={{margin: '10px'}}>
             <Form.Group>
             <Form.Label className="admin-card-title">Nombre</Form.Label>
             <Form.Control name="name" type="text" defaultValue={Item.name}/>
@@ -118,16 +118,31 @@ export default function ItemDetails(props) {
               </Form.Group>
               </Col>
               <Col>
-                <Form.Group>
-                    <Form.Label className="admin-card-title">Precio</Form.Label>
-                    <Form.Control name="price" type="number" defaultValue={Item.price} />
-                </Form.Group>
+              <Form.Label className="admin-card-title">Precio</Form.Label>
+                <InputGroup className="mb-2">
+                    <InputGroup.Prepend>
+                    <InputGroup.Text>€</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control id="inlineFormInputGroup" name="price" type="number" step="any" defaultValue={Item.price} />
+                </InputGroup>
               </Col>
             </Row>
             <Form.Group>
             <Form.Label className="admin-card-title">Descripción</Form.Label>
             <Form.Control name="commentary" type="text" defaultValue={Item.commentary} />
             </Form.Group>
+            <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                <span>
+                {
+                    Item.createBy?( <p>Creado por: {Item.createBy.firstName}</p>):('') 
+                }
+                </span>
+                <span>
+                {
+                    Item.updatedBy?( <p>Actualizado por: {Item.updatedBy.firstName}</p>):('')
+                }
+                </span>
+            </div>
             {
             props.err ? <p style={{color: '#036C9C'}}>{props.errorMessage}</p> : <></>
             } 

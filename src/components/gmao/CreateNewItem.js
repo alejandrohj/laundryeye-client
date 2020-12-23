@@ -87,7 +87,7 @@ export default function CreateNewItem(props) {
               <Col>
                 <Form.Group>
                     <Form.Label className="admin-card-title">Precio</Form.Label>
-                    <Form.Control name="price" type="number" placeholder="Precio" />
+                    <Form.Control name="price" type="number" step="any" placeholder="Precio" />
                 </Form.Group>
               </Col>
             </Row>

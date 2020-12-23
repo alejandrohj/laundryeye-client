@@ -37,7 +37,7 @@ export default function AddNewItem(props) {
             <Form onSubmit={props.onCreate} >
                 <Form.Group>
                 <Form.Label className="admin-card-title">Artículo</Form.Label>
-                <Form.Control name="item" as="select">
+                <Form.Control name="item" as="select" multiple>
                   <option>Elige el artículo</option>
                   {
                     items.map((elem, i) => {

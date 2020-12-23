@@ -12,6 +12,8 @@ import SignIn from './components/auth/SignIn';
 import Gmao from './components/gmao/GMAO';
 import Stock from './components/gmao/Stock';
 import ItemDetails from './components/gmao/ItemDetails';
+import UsersAdmin from './components/Main/UsersAdministracion';
+
 //#endregion Components
 
 
@@ -86,6 +88,9 @@ class App extends Component {
         }}/>
         <Route path="/gmao/stock" render={()=>{
           return <Stock/>
+        }}/>
+        <Route path="/gmao/users" render={()=>{
+          return <UsersAdmin/>
         }}/>
         <Route path="/gamo/item/:id/details" render={(routeProps) => {
           return <ItemDetails 
