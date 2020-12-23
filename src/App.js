@@ -11,6 +11,7 @@ import CagesWasher from './components/cageWasher/CageWasher';
 import SignIn from './components/auth/SignIn';
 import Gmao from './components/gmao/GMAO';
 import Stock from './components/gmao/Stock';
+import ItemDetails from './components/gmao/ItemDetails';
 //#endregion Components
 
 
@@ -86,6 +87,12 @@ class App extends Component {
         <Route path="/gmao/stock" render={()=>{
           return <Stock/>
         }}/>
+        <Route path="/gamo/item/:id/details" render={(routeProps) => {
+          return <ItemDetails 
+                    {...routeProps} 
+                    loggedInUser={this.loggedInUser}
+                  />
+        }} />
       </Switch>
       </>
     )

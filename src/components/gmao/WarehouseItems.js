@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
-import {Table,Button} from 'react-bootstrap';
+import {Table,Button,Nav} from 'react-bootstrap';
 import {API_URL} from '../../config';
 
 
@@ -84,12 +84,24 @@ export default function WarehouseItems(props) {
         console.log(updatedWarehouse)
         axios.post(`${API_URL}/gmao/warehouse/${warehousetoDisplay._id}/update`,{stock: ItemsModified},{withCredentials: true})
             .then((response)=>{
-                setWarehousetoDisplay(response.data) //WHYYYYYYY HAHAHAH
+                setWarehousetoDisplay(response.data) //WHYYYYYYY HAHAHAH can change it with a get request of the warehouses and actualizate the state
                 setWarehousetoDisplay(updatedWarehouse)
         })
         // let orderItems = localStorage.getItem('order')
         // let parseOrder = JSON.parse(orderItems)
         // console.log(parseOrder)
+    }
+    const handleDeleteItemFromWarehouse = (id) =>{
+        let itemsModified = warehousetoDisplay.stock.filter((elem)=>{
+            return elem.itemId._id !== id
+        })
+        let updatedWarehouse  = warehousetoDisplay;
+        updatedWarehouse.stock = itemsModified;
+        axios.post(`${API_URL}/gmao/warehouse/${warehousetoDisplay._id}/update`,{stock: itemsModified},{withCredentials: true})
+        .then((response)=>{
+            setWarehousetoDisplay(response.data)
+            setWarehousetoDisplay(updatedWarehouse)
+    })
     }
 
     if(!warehousetoDisplay){return <p>Loging...</p>}
@@ -110,11 +122,14 @@ export default function WarehouseItems(props) {
                     return(
                         <tbody key={i+'item'}>
                             <tr>
-                            <td><b>{elem.itemId.name}</b> / {elem.itemId.branch} - {elem.itemId.ref}</td>
+                            <td><Nav.Link style={{color: 'white'}} href={`/gamo/item/${elem.itemId._id}/details`}><b>
+                            {elem.itemId.name}</b>/ {elem.itemId.branch} - {elem.itemId.ref}</Nav.Link> </td>
                             <td><b>{elem.itemId.category}</b> <small>{elem.itemId.subcategory}</small></td>
                             <td style={{}}>
                                 {
-                                elem.quantity===0 ? <Button disabled={true} className='lbtn' onClick={() =>handleAmountChange('less',elem.itemId.name)} variant="danger">-</Button> : 
+                                elem.quantity===0 ? <><Button id='quitItemBtn' onClick={(e)=>handleDeleteItemFromWarehouse(elem.itemId._id)}> Quitar</Button>
+                                <Button disabled={true} className='lbtn' onClick={() =>handleAmountChange('less',elem.itemId.name)} variant="danger">-</Button>
+                                </> : 
                                 <Button className='lbtn' onClick={() =>handleAmountChange('less',elem.itemId.name)} variant="danger">-</Button>
                                 }
                                 <label style={{border: 'none', margin: '0px 8px'}}>{elem.quantity}</label>
