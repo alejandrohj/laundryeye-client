@@ -18,6 +18,7 @@ export default function SignIn(props) {
     console.log(loggedInUser)
     if(loggedInUser){
         if(loggedInUser.userType ==='admin') return <Redirect to='/'/>
+        if(loggedInUser.userType ==='operator') return <Redirect to='/'/>
     }
     return (
         <>
