@@ -1,5 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {Form, Button, Row, Col, Modal, Card, Accordion} from 'react-bootstrap';
+import axios from 'axios';
+import {API_URL} from '../../config';
 
 export default function CreateNewItem(props) {
     let categories = ['repuesto','consumible'];
@@ -9,11 +11,20 @@ export default function CreateNewItem(props) {
     const [showCreate, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
+    const [warehouses,setWarehouses] =useState(null);
 
+    useEffect(() => {
+      axios.get(`${API_URL}/gmao/warehouses`, {withCredentials: true})
+      .then((response)=>{
+          setWarehouses(response.data)
+      })
+    }, [])
+    if(!warehouses) return <p>Loading...</p>
+    console.log(warehouses)
     return (
         <>
             <div style={{textAlign: 'center'}} className="create-laundryitem-btn">
-            <Button onClick={handleOpen} className="general-btn createbtn">Crear un nuevo artículo</Button>
+            <Button id='createBtn' onClick={handleOpen} className="general-btn createbtn">Crear un nuevo artículo</Button>
             </div>
             <hr/>
         <Modal centered show={showCreate} onHide={handleClose}>
@@ -94,6 +105,17 @@ export default function CreateNewItem(props) {
             <Form.Group>
             <Form.Label className="admin-card-title">Descripción</Form.Label>
             <Form.Control name="commentary" type="text" placeholder="Comentario" />
+            </Form.Group>
+            <Form.Group>
+            <Form.Label className="admin-card-title">Almacén</Form.Label>
+            <Form.Control name="warehouse" as="select">
+                  <option>Seleciona un almacén</option>
+                  {
+                    warehouses.map((elem, i) => {
+                    return <option key={'warehouse' + i} value={elem._id}>{elem.name}</option>
+                    })
+                  }
+                </Form.Control>
             </Form.Group>
             {
             props.err ? <p style={{color: '#036C9C'}}>{props.errorMessage}</p> : <></>

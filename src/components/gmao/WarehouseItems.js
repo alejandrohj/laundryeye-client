@@ -122,7 +122,7 @@ export default function WarehouseItems(props) {
                     return(
                         <tbody key={i+'item'}>
                             <tr>
-                            <td><Nav.Link style={{color: 'white'}} href={`/gamo/item/${elem.itemId._id}/details`}><b>
+                            <td><Nav.Link id='tbleItemName' style={{color: 'white'}} href={`/gamo/item/${elem.itemId._id}/details`}><b>
                             {elem.itemId.name}</b>/ {elem.itemId.branch} - {elem.itemId.ref}</Nav.Link> </td>
                             <td><b>{elem.itemId.category}</b> <small>{elem.itemId.subcategory}</small></td>
                             <td id='quitSumSubCell'>

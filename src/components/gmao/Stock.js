@@ -5,11 +5,14 @@ import {API_URL} from '../../config';
 
 import GmaoNavbar from './GmaoNavbar';
 import Warehouses from './Warehouses';
+import WarehouseItems from './WarehouseItems';
+import Items from './Items';
 
 export default function Stock(props) {
+
     const[loggedInUser,setLoggedInUser] = useState(null);
     const [redirecting,setRedirecting] = useState (false);
-    const [warehouses,setWarehouses] = useState (null);
+    const [items,setItems] = useState (null);
 
     useEffect(()=>{
         axios.get(`${API_URL}/user`, {withCredentials: true})
@@ -18,29 +21,24 @@ export default function Stock(props) {
         }).catch(() => {
             setRedirecting(true)
         })
-        axios.get(`${API_URL}/gmao/warehouses`)
+        axios.get(`${API_URL}/gmao/items`)
         .then((result)=>{
             console.log(result.data)
-            setWarehouses(result.data)
+            setItems(result.data)
         })
     },[])
 
-    const handleCreateWarehouse = (e) =>{
-        e.preventDefault();
-        const {name, floor} = e.currentTarget;
-        console.log('creating')
-        axios.post(`${API_URL}/gmao/warehouses/create`,{name: name.value,floor: floor.value}, {withCredentials: true})
-            .then((result)=>{
-                window.location.reload(false);
-            })
-    }
+
 
     if(redirecting) return <Redirect to={'/signin'}/>
-    if(!loggedInUser || !warehouses)return <p>Loading...</p>
+    if(!loggedInUser || !items)return <p>Loading...</p>
+    console.log(items)
     return (
         <div>
             <GmaoNavbar loggedInUser= {loggedInUser}/>
-            <Warehouses warehouses = {warehouses} onCreate ={handleCreateWarehouse}/>
+            <Items id='warehouseItemsComponent' items = {items}/>
+            {/* <WarehouseItems id='warehouseItemsComponent' items = {items} /> */}
+            {/* <Warehouses warehouses = {warehouses} onCreate ={handleCreateWarehouse}/> */}
         </div>
     )
 }

@@ -13,6 +13,7 @@ import Gmao from './components/gmao/GMAO';
 import Stock from './components/gmao/Stock';
 import ItemDetails from './components/gmao/ItemDetails';
 import UsersAdmin from './components/Main/UsersAdministracion';
+import Warehouses from './components/gmao/Warehouses';
 
 //#endregion Components
 
@@ -97,7 +98,10 @@ class App extends Component {
                     {...routeProps} 
                     loggedInUser={this.loggedInUser}
                   />
-        }} />
+        }}/>
+        <Route path="/gmao/warehouses" render={()=>{
+          return <Warehouses/>
+        }}/>
       </Switch>
       </>
     )

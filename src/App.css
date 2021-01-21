@@ -143,6 +143,41 @@
     justify-content: center;
   }
 }
+@media only screen and (max-width: 367px) {
+
+  /*mobile*/
+    #StocksTable{
+      font-size: 0.8rem;
+    }
+    #stockView {
+      padding: 0px;
+    }
+    #StocksTable .lbtn{
+      font-size: 1rem;
+      /* width: 0.5rem;
+      height: 0.5rem; */
+      padding: 0.3rem;
+    }
+    #itemsCard{
+      margin: 10px 5px;
+      padding: 0px;
+    }
+    #wareousesTitle{
+      font-size: 20px;
+      margin-top: 10px;
+    }
+    #createBtn {
+      font-size: 12px;
+      margin: 10px 0px;
+    }
+    #quitSumSubCell{
+      flex-direction: column;
+      justify-content: center;
+    }
+    #tbleItemName{
+      padding: 0px
+    }
+  }
 /* REGION Table Styles*/
 #warehouseItemsComponent{
   border-radius: 10px;
