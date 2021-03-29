@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {Switch, Route, withRouter} from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
@@ -17,37 +17,37 @@ import Warehouses from './components/gmao/Warehouses';
 
 //#endregion Components
 
-
-class App extends Component {
-
-  state = {
-    IronsData: [],
-    loggedInUser: null
-  }
+function App() {
+  const [loggedInUser, setLoggednUser] = useState(null);
+  const [err, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [IronsData, setIronsData] = useState(null);
   
-
-  handleSignIn = (e) =>{
+  const handleSignIn = (e) =>{
     e.preventDefault();
     const {email, password} = e.currentTarget;
 
     axios.post(`${API_URL}/signin`,{email: email.value, password: password.value},  {withCredentials: true})
       .then((res)=>{
-        this.setState({
-          loggedInUser: res.data
-        })
+        setLoggednUser(res.data)
         window.location.reload(false);
+      })
+      .catch((err) => {
+        setError(true);
+        let error = err.response.data.error;
+        console.log(error)
+        setErrorMessage(error);
       })
   }
 
-  handleLogOut = () =>{
+  const handleLogOut = () =>{
     console.log('loggingOut')
     axios.post(`${API_URL}/logout`, {}, {withCredentials: true})
     .then(()=>{
-      this.setState({
-        loggedInUser: null
-      }, ()=>{
-        this.props.history.push('/')
-      })
+      setLoggednUser(null)
+    })
+    .then(()=>{
+      window.location.reload(false);
     })
   }
   // cleanRealTimeData = () =>{
@@ -58,28 +58,29 @@ class App extends Component {
   //     })
   // }
 
-  componentDidMount = () =>{
-    //setInterval(this.cleanRealTimeData,86400000)
-    if(!this.loggedInUser){
+  useEffect(() => {
+    if(!loggedInUser){
       axios.get(`${API_URL}/user`, {withCredentials: true})
         .then((result) => {
-          this.setState({
-            loggedInUser: result.data
-          })
+          setLoggednUser(result.data)
         })
     }
-  }
+  }, [])
 
-  render() {
     return (
       <>
-      <Navbar handleLogOut={this.handleLogOut} loggedInUser = {this.loggedInUser}/>
+      <Navbar handleLogOut={handleLogOut} loggedInUser = {loggedInUser}/>
       <Switch>
         <Route exact path="/" render={()=>{
           return <Main/>
         }}/>
         <Route path="/signin" render={()=>{
-          return <SignIn loggedInUser ={this.loggedInUser} onSignIn = {this.handleSignIn}/>
+          return <SignIn 
+            loggedInUser ={loggedInUser} 
+            onSignIn = {handleSignIn}
+            err= {err}
+            errorMessage={errorMessage}
+            />
         }}/>
         <Route path="/cageswasher" render={()=>{
           return <CagesWasher/>
@@ -96,7 +97,7 @@ class App extends Component {
         <Route path="/gamo/item/:id/details" render={(routeProps) => {
           return <ItemDetails 
                     {...routeProps} 
-                    loggedInUser={this.loggedInUser}
+                    loggedInUser={loggedInUser}
                   />
         }}/>
         <Route path="/gmao/warehouses" render={()=>{
@@ -105,7 +106,6 @@ class App extends Component {
       </Switch>
       </>
     )
-  }
 }
 
 export default withRouter(App)

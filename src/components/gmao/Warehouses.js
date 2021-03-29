@@ -36,6 +36,12 @@ export default function Warehouses(props) {
                 window.location.reload(false);
             })
     }
+    const handleDelete = (id) =>{
+        axios.delete(`${API_URL}/gmao/${id}/warehouse/delete`,{withCredentials: true})
+            .then(()=>{
+                window.location.reload(false);
+            })
+    }
     if(redirecting) return <Redirect to={'/signin'}/>
     if(!loggedInUser || !warehouses)return <p>Loading...</p>
     return (
@@ -50,11 +56,12 @@ export default function Warehouses(props) {
                 warehouses?(
                     warehouses.map((elem,i)=>{
                         return (<Card id='itemsCard' bg='light' border="dark" key ={i+'warehouses'} style={{textAlign: 'center' }}>
-                                <Card.Body style={{padding: '0px'}}>
+                                <Card.Body style={{padding: '10px'}}>
                                     <Card.Title>{elem.name}</Card.Title>
                                     <Card.Text>
                                         <p>Localización: {elem.floor}</p>
                                     </Card.Text>
+                                    <Button id='createBtn' variant="danger" onClick={()=>handleDelete(elem._id)}>Borrar</Button>
                                     {/* <Accordion defaultActiveKey="0">
                                     <Accordion.Toggle as={Button} variant="link" eventKey="1">
                                         Desplegar

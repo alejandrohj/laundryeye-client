@@ -15,7 +15,9 @@ export default function ItemDetails(props) {
 
     const [Item, setItem] = useState(null);
     const [loggedInUser, setLoggedInUser] = useState(null);
-    const [redirecting, setRedirecting] = useState(null)
+    const [redirectToStock, setRedirectToStock] = useState(false)
+    const [redirecting, setRedirecting] = useState(null);
+    const [warehouses,setWarehouses] =useState(null);
     
     useEffect(()=>{
         axios.get(`${API_URL}/user`, {withCredentials: true})
@@ -24,10 +26,15 @@ export default function ItemDetails(props) {
         }).catch(() => {
             setRedirecting(true)
         })
+
         axios.get(`${API_URL}/gmao/item/${id}`)
             .then((response)=>{
                 setItem(response.data)
                 console.log(response.data)
+            })
+            axios.get(`${API_URL}/gmao/warehouses`, {withCredentials: true})
+            .then((response)=>{
+                setWarehouses(response.data)
             })
         
     },[])
@@ -35,24 +42,26 @@ export default function ItemDetails(props) {
     const handleUpdateItem =(e)=>{
         e.preventDefault();
         console.log(e.currentTarget)
-        const {name,branch,ref,category,subcategory,unit,commentary,price} = e.currentTarget;
+        const {name,branch,ref,category,subcategory,unit,commentary,price, warehouse} = e.currentTarget;
         console.log(name.value,branch.value,ref.value, category.value, subcategory.value, unit.value, commentary.value, price.value)
         axios.post(`${API_URL}/gmao/item/${id}/update`,{name: name.value,branch: branch.value,ref:ref.value, category:category.value,
-        subcategory:subcategory.value,unit: unit.value, commentary: commentary.value, price: price.value },
+        subcategory:subcategory.value,unit: unit.value, commentary: commentary.value, price: price.value, warehouse: warehouse.value },
          {withCredentials: true})
             .then((result)=>{
-                console.log(result.data)
+                setRedirectToStock(true)
             })
     }
     const handleDeleteItem = () =>{
         axios.delete(`${API_URL}/gmao/item/${id}/delete`)
             .then(()=>{
-                return <Redirect to={'/gmao/stock'}/>
+                setRedirectToStock(true)
+                console.log(redirectToStock)
             })
     }
 
     if(redirecting) return <Redirect to={'/signin'}/>
-    if(!Item) return <p>Loading..</p>
+    if(redirectToStock) return <Redirect to={'/gmao/stock'}/>
+    if(!Item || !warehouses ) return <p>Loading..</p>
     return (
         <>
         <GmaoNavbar loggedInUser= {loggedInUser}/>
@@ -130,6 +139,17 @@ export default function ItemDetails(props) {
             <Form.Group>
             <Form.Label className="admin-card-title">Descripción</Form.Label>
             <Form.Control name="commentary" type="text" defaultValue={Item.commentary} />
+            </Form.Group>
+            <Form.Group>
+            <Form.Label className="admin-card-title">Almacén</Form.Label>
+            <Form.Control name="warehouse" as="select">
+                  <option>{Item.warehouse? Item.warehouse.name: 'Seleciona un almacén'}</option>
+                  {
+                    warehouses.map((elem, i) => {
+                    return <option key={'warehouse' + i} value={elem._id}>{elem.name}</option>
+                    })
+                  }
+                </Form.Control>
             </Form.Group>
             <div style={{display: 'flex', justifyContent: 'space-around'}}>
                 <span>
