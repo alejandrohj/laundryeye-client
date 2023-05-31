@@ -14,6 +14,7 @@ import Stock from './components/gmao/Stock';
 import ItemDetails from './components/gmao/ItemDetails';
 import UsersAdmin from './components/Main/UsersAdministracion';
 import Warehouses from './components/gmao/Warehouses';
+import Tasks from './components/gmao/Tasks';
 
 //#endregion Components
 
@@ -90,6 +91,9 @@ function App() {
         }}/>
         <Route path="/gmao/stock" render={()=>{
           return <Stock/>
+        }}/>
+       <Route path="/gmao/tasks" render={()=>{
+          return <Tasks/>
         }}/>
         <Route path="/gmao/users" render={()=>{
           return <UsersAdmin/>

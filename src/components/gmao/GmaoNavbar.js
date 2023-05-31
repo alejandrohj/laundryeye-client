@@ -11,7 +11,8 @@ export default function GmaoNavbar(props) {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                    <Nav.Link href="/gamo/maintenance">Mantenimiento</Nav.Link>
+                    <Nav.Link href="/gmao/maintenance">Mantenimiento de turno</Nav.Link>
+                    <Nav.Link href="/gmao/tasks">Tareas</Nav.Link>
                     <Nav.Link href="/gmao/stock">Stock</Nav.Link>
                     <Nav.Link href="/gmao/warehouses">Almacenes</Nav.Link>
                     </Nav>
