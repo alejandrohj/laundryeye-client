@@ -15,6 +15,7 @@ import ItemDetails from './components/gmao/ItemDetails';
 import UsersAdmin from './components/Main/UsersAdministracion';
 import Warehouses from './components/gmao/Warehouses';
 import Tasks from './components/gmao/Tasks';
+import LaundryManData from './components/Main/LaundryManData';
 
 //#endregion Components
 
@@ -106,6 +107,9 @@ function App() {
         }}/>
         <Route path="/gmao/warehouses" render={()=>{
           return <Warehouses/>
+        }}/>
+        <Route path="/gmao/laundryMan" render={()=>{
+          return <LaundryManData/>
         }}/>
       </Switch>
       </>

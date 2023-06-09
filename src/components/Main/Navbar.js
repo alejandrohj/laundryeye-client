@@ -26,6 +26,7 @@ export default function NavbarComp(props) {
                         <NavDropdown.Item href="#action/3.4">A</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link href="/gmao">Gestión de mantenimiento</Nav.Link>
+                    <Nav.Link href="/gmao/laundryMan">Vista Lavanderos</Nav.Link>
                     {
                         loggedInUser? (loggedInUser.userType === 'admin'?(<Nav.Link href='/gmao/users'>Users</Nav.Link>):('')):('')
                     }
