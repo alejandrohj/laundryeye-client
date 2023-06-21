@@ -12,8 +12,8 @@ export default function AutoSignIn() {
     const [errorMessage, setErrorMessage] = useState(null);
     const [redirecting,setRedirecting] = useState (false);
 
-        const email = "alba@laundryeye.com";
-        const password = "123456Aa@";
+        const email = "lavandero@mylinen.com";
+        const password = "111111Aa@";
         console.log("autosigning")
     
         axios.post(`${API_URL}/signin`,{email: email, password: password},  {withCredentials: true})
