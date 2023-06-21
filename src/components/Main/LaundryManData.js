@@ -15,6 +15,12 @@ export default function LaundryManData() {
     const[loggedInUser,setLoggedInUser] = useState(null);
     const [redirecting,setRedirecting] = useState (false);
 
+    let clientesDías = ["Valle, Lago, Costa","Valle, Lago, Costa","Radisson Blu","Radisson Blu","Hotel y Aptos. Puerto Mogán",
+    "Hotel y Aptos. Puerto Mogán", "", "", "OBC","OBC","Escorial","Escorial","Dorado","Dorado","Eugenia","Eugenia","Jardín Dorado , Maspalomas Resort",
+    "Jardín Dorado, Maspalomas Resort", "Gacelas y Las Rosas", "", "", "Hotel Gold", "Hotel Gold", "","", "Hotel Silken y Hotel Lumm","Hotel Silken y Hotel Lumm",
+    "","",""];
+    let today = new Date().getDate();
+
     useEffect(()=>{
         axios.get(`${API_URL}/user`, {withCredentials: true})
         .then((result) => {
@@ -61,6 +67,18 @@ export default function LaundryManData() {
             </Card.Text>
             </Card.Body>
         </Card>
+        </div>
+        <div>
+            <Card>
+                <Card.Body>
+                    <Card.Title style={{textAlign:"center"}}> Lavar Forros de Jaula Interior de:</Card.Title>
+                    <Card.Text style={{textAlign:"center", padding:"10px",border: '1px solid black'}}>
+                        
+                            <h4 style={{color:"blue"}}>{(clientesDías[today]-1)?(clientesDías[today]-1):""}</h4>
+                        
+                    </Card.Text>
+                </Card.Body>
+            </Card>
         </div>
         <Footer/>
         </>

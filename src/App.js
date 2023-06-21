@@ -16,6 +16,7 @@ import UsersAdmin from './components/Main/UsersAdministracion';
 import Warehouses from './components/gmao/Warehouses';
 import Tasks from './components/gmao/Tasks';
 import LaundryManData from './components/Main/LaundryManData';
+import AutoSignIn from './components/Main/AutosignIn';
 
 //#endregion Components
 
@@ -110,6 +111,9 @@ function App() {
         }}/>
         <Route path="/gmao/laundryMan" render={()=>{
           return <LaundryManData/>
+        }}/>
+        <Route path="/laundryman/signin" render={()=>{
+          return <AutoSignIn/>
         }}/>
       </Switch>
       </>

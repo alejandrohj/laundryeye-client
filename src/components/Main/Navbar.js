@@ -17,29 +17,34 @@ export default function NavbarComp(props) {
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
                 <Navbar.Brand href="/"><img src={`${PUBLIC_URL}/mogan-horizontal_blanco_MODIFICACIÓN.png`} alt='logo' height='50'/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="mr-auto">
-                    <NavDropdown title="Maquinaria" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="/">Planchas</NavDropdown.Item>
-                        <NavDropdown.Item href="/cageswasher">Lavadora de Jaulas</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">A</NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link href="/gmao">Gestión de mantenimiento</Nav.Link>
-                    <Nav.Link href="/gmao/laundryMan">Vista Lavanderos</Nav.Link>
-                    {
-                        loggedInUser? (loggedInUser.userType === 'admin'?(<Nav.Link href='/gmao/users'>Users</Nav.Link>):('')):('')
-                    }
-                    </Nav>
-                    {
-                    loggedInUser? (<Nav>
-                    <Nav><Button onClick={props.handleLogOut}>LogOut </Button></Nav>
-                    </Nav>) : (<Nav>
-                    <Nav><Link to={'/signin'}> <Button>Registrarse</Button></Link></Nav>
-                    </Nav>)
-                    }
+                {
+                loggedInUser?(
                     
-                </Navbar.Collapse>
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                        <NavDropdown title="Maquinaria" id="collasible-nav-dropdown">
+                            <NavDropdown.Item href="/">Planchas</NavDropdown.Item>
+                            <NavDropdown.Item href="/cageswasher">Lavadora de Jaulas</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="#action/3.4">A</NavDropdown.Item>
+                        </NavDropdown>
+                        <Nav.Link href="/gmao">Gestión de mantenimiento</Nav.Link>
+                        <Nav.Link href="/gmao/laundryMan">Vista Lavanderos</Nav.Link>
+                        {
+                            loggedInUser? (loggedInUser.userType === 'admin'?(<Nav.Link href='/gmao/users'>Users</Nav.Link>):('')):('')
+                        }
+                        </Nav>
+                        {
+                        loggedInUser? (<Nav>
+                        <Nav><Button onClick={props.handleLogOut}>LogOut </Button></Nav>
+                        </Nav>) : (<Nav>
+                        <Nav><Link to={'/signin'}> <Button>Registrarse</Button></Link></Nav>
+                        </Nav>)
+                        }
+                        
+                    </Navbar.Collapse>
+                ):("")
+                }
             </Navbar>
     )
 }
