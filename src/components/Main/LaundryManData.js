@@ -71,10 +71,10 @@ export default function LaundryManData() {
         <div>
             <Card>
                 <Card.Body>
-                    <Card.Title style={{textAlign:"center"}}> Lavar Forros de Jaula Interior de:</Card.Title>
+                    <Card.Title style={{textAlign:"center"}}> Lavar Forros Interiores de las Jaulas de:</Card.Title>
                     <Card.Text style={{textAlign:"center", padding:"10px",border: '1px solid black'}}>
                         
-                            <h4 style={{color:"blue"}}>{(clientesDías[today]-1)?(clientesDías[today]-1):""}</h4>
+                            <h4 style={{color:"blue"}}>{(clientesDías[today-1])?(clientesDías[today-1]):""}</h4>
                         
                     </Card.Text>
                 </Card.Body>
