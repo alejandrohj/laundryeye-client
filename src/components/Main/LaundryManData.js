@@ -51,7 +51,7 @@ export default function LaundryManData() {
     return (
         <>
         <div style={{display: 'flex', flexWrap: 'wrap', justifyContent:"center"}}>
-        <Card style={{ margin:"100px" }}>
+        <Card style={{ margin:"150px 100px" }}>
             <Card.Body>
             <Card.Title>Temperatura Caldera de Aceite Grande (nº2)</Card.Title>
             <Card.Text style={{textAlign:"center", padding:"10px",border: '1px solid black'}}>
@@ -59,7 +59,7 @@ export default function LaundryManData() {
             </Card.Text>
             </Card.Body>
         </Card>
-        <Card style={{ margin:"100px"  }}>
+        <Card style={{ margin:"150px 100px"  }}>
             <Card.Body>
             <Card.Title>Temperatura Caldera de Aceite Pequeña (nº3)</Card.Title>
             <Card.Text style={{textAlign:"center", padding:"10px",border: '1px solid black'}}>
@@ -77,6 +77,11 @@ export default function LaundryManData() {
                             <h4 style={{color:"blue"}}>{(clientesDías[today-1])?(clientesDías[today-1]):""}</h4>
                         
                     </Card.Text>
+                    <Card.Text style={{textAlign:"center", padding:"10px"}}>
+                        
+                        <h3 style={{color: "red"}}>Recordar que cuando se lavan los forros de las jaulas hay que limpiar también la basura del fondo de la jaula</h3>
+                    
+                </Card.Text>
                 </Card.Body>
             </Card>
         </div>
