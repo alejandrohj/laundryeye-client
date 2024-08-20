@@ -30,6 +30,7 @@ export default function NavbarComp(props) {
                         </NavDropdown>
                         <Nav.Link href="/gmao">Gestión de mantenimiento</Nav.Link>
                         <Nav.Link href="/gmao/laundryMan">Vista Lavanderos</Nav.Link>
+                        <Nav.Link href="/boilersComsumtion">Consumo calderas</Nav.Link>
                         {
                             loggedInUser? (loggedInUser.userType === 'admin'?(<Nav.Link href='/gmao/users'>Users</Nav.Link>):('')):('')
                         }

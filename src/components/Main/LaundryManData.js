@@ -15,9 +15,9 @@ export default function LaundryManData() {
     const[loggedInUser,setLoggedInUser] = useState(null);
     const [redirecting,setRedirecting] = useState (false);
 
-    let clientesDías = ["Valle, Lago, Costa","Valle, Lago, Costa","Radisson Blu","Radisson Blu","Hotel y Aptos. Puerto Mogán",
-    "Hotel y Aptos. Puerto Mogán", "", "", "OBC","OBC","Escorial","Escorial","Dorado","Dorado","Eugenia","Eugenia","Jardín Dorado , Maspalomas Resort",
-    "Jardín Dorado, Maspalomas Resort", "Gacelas y Las Rosas", "", "", "Hotel Gold", "Hotel Gold", "","", "Hotel Silken y Hotel Lumm","Hotel Silken y Hotel Lumm",
+    let clientesDías = ["Hoteles Valle, Lago, Costa","Hoteles Valle, Lago, Costa","Hotel Radisson Blu","Hotel Radisson Blu","Hotel y Aptos. Puerto Mogán",
+    "Hotel y Aptos. Puerto Mogán", "Hotel Gregory", "Hotel Gregory", "OBC","OBC","Escorial","Escorial","Dorado","Dorado","Eugenia","Eugenia","Jardín Dorado , Maspalomas Resort",
+    "Jardín Dorado, Maspalomas Resort", "Gacelas y Las Rosas", "Hotel Salobre", "Hotel Salobre", "Hotel Gold", "Hotel Gold", "Hotel Parque Tropical","Hotel Parque Tropical", "Hotel Silken y Hotel Lumm","Hotel Silken y Hotel Lumm",
     "","",""];
     let today = new Date().getDate();
 
@@ -29,7 +29,7 @@ export default function LaundryManData() {
           .then((res)=>{
             setBoilerN3Temperature(res.data[0])
             setBoilerN2Temperature(res.data[1])
-              setInterval(loadData,2000)
+            setInterval(loadData,2000)
           })
           .catch(()=>{
               setInterval(loadData,2000)
@@ -51,7 +51,7 @@ export default function LaundryManData() {
     return (
         <>
         <div style={{display: 'flex', flexWrap: 'wrap', justifyContent:"center"}}>
-        <Card style={{ margin:"150px 100px" }}>
+        <Card style={{ margin:"150px 100px 60px" }}>
             <Card.Body>
             <Card.Title>Temperatura Caldera de Aceite Grande (nº2)</Card.Title>
             <Card.Text style={{textAlign:"center", padding:"10px",border: '1px solid black'}}>
@@ -59,11 +59,11 @@ export default function LaundryManData() {
             </Card.Text>
             </Card.Body>
         </Card>
-        <Card style={{ margin:"150px 100px"  }}>
+        <Card style={{ margin:"150px 100px 60px"  }}>
             <Card.Body>
             <Card.Title>Temperatura Caldera de Aceite Pequeña (nº3)</Card.Title>
             <Card.Text style={{textAlign:"center", padding:"10px",border: '1px solid black'}}>
-            <h2>{BoilerN3Temperature}ºC</h2>
+            <h2>{(Number(BoilerN3Temperature?BoilerN3Temperature.replace(",", "."):"0")+ 15).toFixed(1).toString().replace(".",",")}ºC</h2>
             </Card.Text>
             </Card.Body>
         </Card>

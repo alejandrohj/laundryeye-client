@@ -17,6 +17,7 @@ import Warehouses from './components/gmao/Warehouses';
 import Tasks from './components/gmao/Tasks';
 import LaundryManData from './components/Main/LaundryManData';
 import AutoSignIn from './components/Main/AutosignIn';
+import BoilersComsumtionData from './components/Main/BoilersComsumtionData'
 
 //#endregion Components
 
@@ -114,6 +115,9 @@ function App() {
         }}/>
         <Route path="/laundryman/signin" render={()=>{
           return <AutoSignIn/>
+        }}/>
+        <Route path="/boilersComsumtion" render={()=>{
+          return <BoilersComsumtionData/>
         }}/>
       </Switch>
       </>
