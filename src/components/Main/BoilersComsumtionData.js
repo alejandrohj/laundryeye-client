@@ -11,6 +11,7 @@ export default function BoilersComsumtionData() {
     const[loggedInUser,setLoggedInUser] = useState(null);
     const [redirecting,setRedirecting] = useState (false);
 
+    let mes = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Nombiembre','Diciembre']
 
 
     useEffect(()=>{
@@ -31,34 +32,36 @@ export default function BoilersComsumtionData() {
   if(redirecting) return <Redirect to={'/signin'}/>
   if(!boilersComsData || !loggedInUser) return <LoadingPage/>
   return (
-    <>
-        <Table>
-            <thead>
-                <th>Día</th>
-                <th>Consumo Caldera AT 1 (Grande)</th>
-                <th>Consumo Caldera AT 2 </th>
-                <th>Consumo Caldera VAPOR</th>
-                <th>Total</th>
+    <div style={{margin:"10px", maxWidth:"100%", overflow:"auto", maxHeight:"500px"}}>
+        <Table striped bordered hover>
+            <thead style={{textAlign:"center"}}>
+                <th style={{position:"sticky", top:0, zIndex:"1", backgroundColor:"white"}}>Día</th>
+                <th style={{position:"sticky", top:0, zIndex:"1", backgroundColor:"white"}}>Consumo Caldera AT 1 (Grande)</th>
+                <th style={{position:"sticky", top:0, zIndex:"1", backgroundColor:"white"}}>Consumo Caldera AT 2 </th>
+                <th style={{position:"sticky", top:0, zIndex:"1", backgroundColor:"white"}}>Consumo Caldera VAPOR</th>
+                <th style={{position:"sticky", top:0, zIndex:"1", backgroundColor:"white"}}>Total</th>
             </thead>
             <tbody>
             {
                 boilersComsData.map((boildata)=>{
+                    let numMes = Number(boildata.fecha.slice(5,7))
+                    let elmes = mes[numMes-1];
                     let totalDayComsumption = boildata.boilersData[0].oilData.dayConsumption + 
                     boildata.boilersData[1].oilData.dayConsumption + 
                     boildata.boilersData[2].oilData.dayConsumption;
                     return(
-                        <tr>
-                            <td>{boildata.fecha}</td>
-                            <td>{boildata.boilersData[0].oilData.dayConsumption}</td>
-                            <td>{boildata.boilersData[1].oilData.dayConsumption}</td>
-                            <td>{boildata.boilersData[2].oilData.dayConsumption}</td>
-                            <td>{totalDayComsumption}</td>
+                        <tr style={{textAlign:"center"}}>
+                            <td style={{width:"24%"}}>{boildata.fecha.slice(8,10) + " de " + elmes + " de " + boildata.fecha.slice(0,4 )}</td>
+                            <td style={{width:"18%"}}>{Number(boildata.boilersData[0].oilData.dayConsumption).toFixed(2)}</td>
+                            <td style={{width:"18%"}}>{Number(boildata.boilersData[1].oilData.dayConsumption).toFixed(2)}</td>
+                            <td style={{width:"18%"}}>{Number(boildata.boilersData[2].oilData.dayConsumption).toFixed(2)}</td>
+                            <td style={{width:"22%"}}>{Number(totalDayComsumption).toFixed(2)}</td>
                         </tr>
                     )
                 })
             }
             </tbody>
         </Table>
-    </>
+    </div>
   )
 }
