@@ -80,6 +80,14 @@
   width: 30rem;
   padding: 30px;
 }
+
+.boxShadowS {
+  box-shadow:0 0 2px #000;
+  border:1px solid white;
+}
+
+
+
 @media only screen and (min-width: 950px) {
   #quitSumSubCell {
     display: flex;
@@ -142,6 +150,8 @@
       width: 100%;
     }
   }
+
+
 @media only screen and (max-width: 450px) {
 
 /*mobile*/
@@ -176,6 +186,9 @@
   #siginCard{
     width: 20rem;
     padding: 10px;
+}
+#boilersConmsumtionTable {
+  font-size: 0.8rem;
 }
 }
 @media only screen and (max-width: 367px) {
