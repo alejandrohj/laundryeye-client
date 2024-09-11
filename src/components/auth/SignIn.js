@@ -15,7 +15,17 @@ export default function SignIn(props) {
                 setLoggedInUser(res.data);
             })
     },[props.loggedInUser])
-    console.log(loggedInUser)
+    
+    function myFunction() {
+        console.log("jdw")
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+    }
+    
     if(loggedInUser){
         if(loggedInUser.userType ==='admin') return <Redirect to='/'/>
         if(loggedInUser.userType ==='operator') return <Redirect to='/'/>
@@ -37,9 +47,9 @@ export default function SignIn(props) {
 
                 <Form.Group style={{width:'80%'}} controlId="formBasicPassword">
                 <Form.Label  style={{color: '#036C9C', fontWeight:'600'}}>Contraseña</Form.Label>
-                <Form.Control style={{textAlign: 'center'}} name="password" type="password" placeholder="Contraseña" />
-                <Form.Text className="text-muted">
-                </Form.Text>
+                <Form.Control style={{textAlign: 'center'}} name="password" type="password" placeholder="Contraseña" id="myInput"/>
+                <br/>
+                <input type="checkbox" onChange={()=>myFunction()}/> Mostrar contraseña
                 </Form.Group>
                 {
                 props.err ? <p style={{color: '#ff2b2b'}}>{props.errorMessage}</p> : <></>

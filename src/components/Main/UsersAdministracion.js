@@ -34,7 +34,8 @@ export default function UsersAdministracion() {
             email: email.value,password: password.value, userType: userType.value },
         {withCredentials:true})
             .then((response)=>{
-                window.location.reload(false);
+                console.log(response.error)
+                // window.location.reload(false);
             })
     }
     if(redirecting) return <Redirect to={'/signin'}/>

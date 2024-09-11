@@ -69,18 +69,18 @@ export default function BoilersComsumtionData() {
                 boilersComsData.map((boildata)=>{
                     let numMes = Number(boildata.fecha.slice(5,7))
                     let elmes = mes[numMes-1];
-                    let totalDayComsumption = boildata.boilersData[0]?boildata.boilersData[0].oilData.dayConsumption:0 + 
-                    boildata.boilersData[1]?boildata.boilersData[1].oilData.dayConsumption:0 + 
-                    boildata.boilersData[2]?boildata.boilersData[2].oilData.dayConsumption:0;
+                    let totalDayComsumption = Number(boildata.boilersData[0]?boildata.boilersData[0].oilData.dayConsumption:0) + 
+                    Number(boildata.boilersData[1]?boildata.boilersData[1].oilData.dayConsumption:0) + 
+                    Number(boildata.boilersData[2]?boildata.boilersData[2].oilData.dayConsumption:0);
                     if(boildata.load) {
-                        accDepósit = accDepósit+boildata.totalLoaded;
+                        accDepósit = accDepósit + boildata.totalLoaded;
                         rowStyle = {
                             textAlign:"center",
                             backgroundColor: "rgba(50, 168, 82, 0.2)"
                         }
                         }
                     else accDepósit = accDepósit - totalDayComsumption;
-                    if(accDepósit <0)accDepósit=0;
+                    if(accDepósit <0)accDepósit = 0;
                     if(accDepósit >5000) accDepósit = 5000;
                     return(
                         <tr style={rowStyle}>

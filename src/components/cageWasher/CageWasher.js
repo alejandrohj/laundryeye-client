@@ -64,7 +64,9 @@ export default function CageWasher() {
 
     }
 
-    return (
+    if(!RTData) return <h5>SIN DATOS</h5>
+
+    else return (
         <div style={{margin: '30px'}}>
         <h1>Tunel de lavado de jaulas</h1>
         <div style={{display:'flex', flexWrap : 'wrap'}}>

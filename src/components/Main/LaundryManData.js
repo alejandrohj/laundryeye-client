@@ -59,11 +59,11 @@ export default function LaundryManData() {
             </Card.Text>
             </Card.Body>
         </Card>
-        <Card style={{ margin:"150px 100px 60px"  }}>
+        <Card style={{ margin:"150px 100px 60px"}}>
             <Card.Body>
             <Card.Title>Temperatura Caldera de Aceite Pequeña (nº3)</Card.Title>
             <Card.Text style={{textAlign:"center", padding:"10px",border: '1px solid black'}}>
-            <h2>{(Number(BoilerN3Temperature?BoilerN3Temperature.replace(",", "."):"0")+ 15).toFixed(1).toString().replace(".",",")}ºC</h2>
+            <h2>{(Number(BoilerN3Temperature?BoilerN3Temperature.replace(",", "."):"0")).toFixed(1).toString().replace(".",",")}ºC</h2>
             </Card.Text>
             </Card.Body>
         </Card>
